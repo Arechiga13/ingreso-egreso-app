@@ -12,13 +12,13 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   cargando: boolean;
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor( public authService: AuthService,
                public store: Store<AppState> ) { }
 
   ngOnInit() {
-    this.store.select('ui')
+    this.subscription = this.store.select('ui')
       .subscribe( ui => this.cargando = ui.isLoading );
   }
 
